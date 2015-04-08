@@ -1,5 +1,5 @@
 function supports_history_api() {
-  return !!(window.history && history.pushState);
+  return Modernizr.history;
 }
 
 function swapPhoto(href) {
@@ -32,7 +32,9 @@ function setupHistoryClicks() {
 }
 
 window.onload = function() {
-  if (!supports_history_api()) { return; }
+  if (!supports_history_api()) {
+	alert("History API is not supported"); 
+	return; }
   setupHistoryClicks();
   window.setTimeout(function() {
     window.addEventListener("popstate", function(e) {
